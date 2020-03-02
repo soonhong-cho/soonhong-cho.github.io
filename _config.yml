@@ -1,0 +1,13 @@
+# Site settings
+title: Doeun Kim
+email: doeun2@ucla.edu
+description: >
+ Department of Political Science
+ Somewhere
+ Los Angeles, CA somewhere
+baseurl: "" # the subpath of your site, e.g. /blog/
+url: "http://doeun-kim.github.io" # the base hostname & protocol for your site
+github_username:  doeun-kim
+encoding: UTF-8
+# Build settings
+markdown: kramdown
