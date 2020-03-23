@@ -444,13 +444,38 @@ color: #d14;
           theseArgs = theseArgs.concat([task.data]);
           task = task.code;
         }
-        var taskFunc = eval("(" + task + ")");
+        var taskFunc = tryEval(task);
         if (typeof(taskFunc) !== "function") {
           throw new Error("Task must be a function! Source:\n" + task);
         }
         taskFunc.apply(target, theseArgs);
       });
     }
+  }
+
+  // Attempt eval() both with and without enclosing in parentheses.
+  // Note that enclosing coerces a function declaration into
+  // an expression that eval() can parse
+  // (otherwise, a SyntaxError is thrown)
+  function tryEval(code) {
+    var result = null;
+    try {
+      result = eval(code);
+    } catch(error) {
+      if (!error instanceof SyntaxError) {
+        throw error;
+      }
+      try {
+        result = eval("(" + code + ")");
+      } catch(e) {
+        if (e instanceof SyntaxError) {
+          throw error;
+        } else {
+          throw e;
+        }
+      }
+    }
+    return result;
   }
 
   function initSizing(el) {
@@ -845,17 +870,56 @@ color: #d14;
     invokePostRenderHandlers();
   }
 
-  // Wait until after the document has loaded to render the widgets.
+
+  function has_jQuery3() {
+    if (!window.jQuery) {
+      return false;
+    }
+    var $version = window.jQuery.fn.jquery;
+    var $major_version = parseInt($version.split(".")[0]);
+    return $major_version >= 3;
+  }
+
+  /*
+  / Shiny 1.4 bumped jQuery from 1.x to 3.x which means jQuery's
+  / on-ready handler (i.e., $(fn)) is now asyncronous (i.e., it now
+  / really means $(setTimeout(fn)).
+  / https://jquery.com/upgrade-guide/3.0/#breaking-change-document-ready-handlers-are-now-asynchronous
+  /
+  / Since Shiny uses $() to schedule initShiny, shiny>=1.4 calls initShiny
+  / one tick later than it did before, which means staticRender() is
+  / called renderValue() earlier than (advanced) widget authors might be expecting.
+  / https://github.com/rstudio/shiny/issues/2630
+  /
+  / For a concrete example, leaflet has some methods (e.g., updateBounds)
+  / which reference Shiny methods registered in initShiny (e.g., setInputValue).
+  / Since leaflet is privy to this life-cycle, it knows to use setTimeout() to
+  / delay execution of those methods (until Shiny methods are ready)
+  / https://github.com/rstudio/leaflet/blob/18ec981/javascript/src/index.js#L266-L268
+  /
+  / Ideally widget authors wouldn't need to use this setTimeout() hack that
+  / leaflet uses to call Shiny methods on a staticRender(). In the long run,
+  / the logic initShiny should be broken up so that method registration happens
+  / right away, but binding happens later.
+  */
+  function maybeStaticRenderLater() {
+    if (shinyMode && has_jQuery3()) {
+      window.jQuery(window.HTMLWidgets.staticRender);
+    } else {
+      window.HTMLWidgets.staticRender();
+    }
+  }
+
   if (document.addEventListener) {
     document.addEventListener("DOMContentLoaded", function() {
       document.removeEventListener("DOMContentLoaded", arguments.callee, false);
-      window.HTMLWidgets.staticRender();
+      maybeStaticRenderLater();
     }, false);
   } else if (document.attachEvent) {
     document.attachEvent("onreadystatechange", function() {
       if (document.readyState === "complete") {
         document.detachEvent("onreadystatechange", arguments.callee);
-        window.HTMLWidgets.staticRender();
+        maybeStaticRenderLater();
       }
     });
   }
@@ -943,7 +1007,7 @@ color: #d14;
       if (o !== null && typeof o === "object" && part in o) {
         if (i == (l - 1)) { // if we are at the end of the line then evalulate
           if (typeof o[part] === "string")
-            o[part] = eval("(" + o[part] + ")");
+            o[part] = tryEval(o[part]);
         } else { // otherwise continue to next embedded object
           o = o[part];
         }
@@ -1516,13 +1580,13 @@ summary {
 </div>
 
 
-<div id="htmlwidget-a3030009175594235112" class="timevis html-widget" style="width:100%;height:480px;">
+<div id="htmlwidget-7ad86ac9df2c86d2b31c" class="timevis html-widget" style="width:100%;height:480px;">
 <div class="btn-group zoom-menu">
 <button type="button" class="btn btn-default btn-lg zoom-in" title="Zoom in">+</button>
 <button type="button" class="btn btn-default btn-lg zoom-out" title="Zoom out">-</button>
 </div>
 </div>
-<script type="application/json" data-for="htmlwidget-a3030009175594235112">{"x":{"items":[{"explanation":"Fodney-MCCumbert Act","start":"1992","group":"bill","content":"F-M tariff Act","subgroup":"","id":"1"},{"explanation":"the Great Depression","start":"1929","end":"1930","group":"econ","content":"GD","subgroup":"","id":"2"},{"explanation":"Smoot-Hawley Tariff Act","start":"1930","group":"bill","content":"S-H tariff Act","subgroup":"","id":"3"},{"explanation":"Vietnam War","start":"1955-11-01","end":"1975-04-30","group":"war","content":"Vietnam War","subgroup":"","id":"4"},{"explanation":"Trade Act (Gold Judith, p162)","start":"1979","group":"bill","content":"Trade Act","subgroup":"","id":"5"},{"explanation":"Franklin D. Roosevelt","start":"1933-03-04","end":"1945-04-12","group":"leader","content":"Roosevelt","subgroup":"Dem","id":"6"},{"explanation":"Harry S. Truman","start":"1945-04-12","end":"1953-01-20","group":"leader","content":"Truman","subgroup":"Dem","id":"7"},{"explanation":"Dwight D. Eisenhower","start":"1953-01-20","end":"1961-01-20","group":"leader","content":"Eisenhower","subgroup":"Rep","id":"8"},{"explanation":"Lyndon B. Johnson","start":"1963-11-22","end":"1969-01-20","group":"leader","content":"Johnson","subgroup":"Dem","id":"9"},{"explanation":"John F. Kennedy","start":"1961-01-20","end":"1963-11-22","group":"leader","content":"Kennedy","subgroup":"Dem","id":"10"},{"explanation":"Richard Nixon","start":"1969-01-20","end":"1974-08-09","group":"leader","content":"Nixon","subgroup":"Rep","id":"11"},{"explanation":"Ronald Reagan","start":"1981-01-20","end":"1989-01-20","group":"leader","content":"Reagan","subgroup":"Rep","id":"12"},{"explanation":"Margaret Thatcher","start":"1979-05-04","end":"1990-11-28","group":"leader","content":"Thatcher","id":"13"},{"explanation":"World War I","start":"1914-07-28","end":"1918-11-11","group":"war","content":"WWI","subgroup":"","id":"14"},{"explanation":"World War II","start":"1939-09-01","end":"1945-09-02","group":"war","content":"WWII","subgroup":"","id":"15"},{"explanation":"1973 Oil Crisis","start":"1973-10","end":"1974-03","group":"econ","content":"Oil Crisis I","subgroup":"","id":"16"},{"explanation":"1979 Oil Crisis","start":"1979","end":"1980","group":"econ","content":"Oil Crisis II","subgroup":"","id":"17"}],"groups":[{"group":"bill","id":"bill","content":"bill"},{"group":"econ","id":"econ","content":"econ"},{"group":"war","id":"war","content":"war"},{"group":"leader","id":"leader","content":"leader"}],"showZoom":true,"zoomFactor":0.5,"fit":true,"options":[],"height":null,"api":[]},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-7ad86ac9df2c86d2b31c">{"x":{"items":[{"explanation":"Fodney-MCCumbert Act","start":"1992","group":"bill","content":"F-M tariff Act","subgroup":"","style":"background-color: #D3D3D3; border: 1px solid #000000; border-color: #000000","id":"1"},{"explanation":"the Great Depression","start":"1929","end":"1930","group":"econ","content":"GD","subgroup":"","style":"background-color: #D3D3D3; border: 1px solid #000000;","id":"2"},{"explanation":"Smoot-Hawley Tariff Act","start":"1930","group":"bill","content":"S-H tariff Act","subgroup":"","style":"background-color: #D3D3D3; border: 1px solid #000000;","id":"3"},{"explanation":"Vietnam War","start":"1955-11-01","end":"1975-04-30","group":"war","content":"Vietnam War","subgroup":"","style":"background-color: #D3D3D3; border: 1px solid #000000;","id":"4"},{"explanation":"Trade Act (Gold Judith, p162)","start":"1979","group":"bill","content":"Trade Act","subgroup":"","style":"background-color: #D3D3D3; border: 1px solid #000000;","id":"5"},{"explanation":"Franklin D. Roosevelt","start":"1933-03-04","end":"1945-04-12","group":"leader","content":"Roosevelt","subgroup":"Dem","style":"background-color: #B3D2FE; border: 1px solid #000000;","id":"6"},{"explanation":"Harry S. Truman","start":"1945-04-12","end":"1953-01-20","group":"leader","content":"Truman","subgroup":"Dem","style":"background-color: #B3D2FE; border: 1px solid #000000;","id":"7"},{"explanation":"Dwight D. Eisenhower","start":"1953-01-20","end":"1961-01-20","group":"leader","content":"Eisenhower","subgroup":"Rep","style":"background-color: #FEC0B3; border: 1px solid #000000;","id":"8"},{"explanation":"Lyndon B. Johnson","start":"1963-11-22","end":"1969-01-20","group":"leader","content":"Johnson","subgroup":"Dem","style":"background-color: #B3D2FE; border: 1px solid #000000;","id":"9"},{"explanation":"John F. Kennedy","start":"1961-01-20","end":"1963-11-22","group":"leader","content":"Kennedy","subgroup":"Dem","style":"background-color: #B3D2FE; border: 1px solid #000000;","id":"10"},{"explanation":"Richard Nixon","start":"1969-01-20","end":"1974-08-09","group":"leader","content":"Nixon","subgroup":"Rep","style":"background-color: #FEC0B3; border: 1px solid #000000;","id":"11"},{"explanation":"Ronald Reagan","start":"1981-01-20","end":"1989-01-20","group":"leader","content":"Reagan","subgroup":"Rep","style":"background-color: #FEC0B3; border: 1px solid #000000;","id":"12"},{"explanation":"Margaret Thatcher","start":"1979-05-04","end":"1990-11-28","group":"leader","content":"Thatcher","style":"background-color: #D3D3D3; border: 1px solid #000000;","id":"13"},{"explanation":"World War I","start":"1914-07-28","end":"1918-11-11","group":"war","content":"WWI","subgroup":"","style":"background-color: #D3D3D3; border: 1px solid #000000;","id":"14"},{"explanation":"World War II","start":"1939-09-01","end":"1945-09-02","group":"war","content":"WWII","subgroup":"","style":"background-color: #D3D3D3; border: 1px solid #000000;","id":"15"},{"explanation":"1973 Oil Crisis","start":"1973-10","end":"1974-03","group":"econ","content":"Oil Crisis I","subgroup":"","style":"background-color: #D3D3D3; border: 1px solid #000000;","id":"16"},{"explanation":"1979 Oil Crisis","start":"1979","end":"1980","group":"econ","content":"Oil Crisis II","subgroup":"","style":"background-color: #D3D3D3; border: 1px solid #000000;","id":"17"}],"groups":[{"group":"bill","id":"bill","content":"bill"},{"group":"econ","id":"econ","content":"econ"},{"group":"war","id":"war","content":"war"},{"group":"leader","id":"leader","content":"leader"}],"showZoom":true,"zoomFactor":0.5,"fit":true,"options":[],"height":null,"api":[]},"evals":[],"jsHooks":[]}</script>
 
 
 
