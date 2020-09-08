@@ -1,7 +1,6 @@
 ---
-layout: page
+layout: default
 title: CV
-permalink: /cv/
 ---
 
 You can download the CV <a href = "https://github.com/doeun-kim/doeun-kim.github.io/blob/master/pdf/cv.pdf"> [here]</a>.
