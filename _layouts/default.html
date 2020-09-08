@@ -1,20 +1,66 @@
 <!DOCTYPE html>
 <html>
-{% include_relative google_analytics.html %}
-  {% include_relative head.html %}
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-159387100-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-159387100-1');
+</script>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Doeun Kim</title>
+  <meta name="description" content="Department of Political Science Bunche Hall Los Angeles, CA 90095
+">
+    <link rel="stylesheet" href="./css/main.css" />
+
+</head>
+
 
   <body>
 
-    {% include_relative header.html %}
+    <header class="site-header">
 
-    <div class="page-content">
+  <div class="wrapper">
+
+    <a class="site-title" href="/">Doeun Kim</a>
+
+    <nav class="site-nav">
+
+
+      <div class="trigger">
+
+
+          <a class="page-link" href="index.html">Home</a>
+
+          <a class="page-link" href="cv.html">CV</a>
+
+          <a class="page-link" href="research.html">Research</a>
+
+          <a class="page-link" href="teaching.html">Teaching</a>
+          
+           <a class="page-link" href="about.md">test</a>
+
+      </div>
+    </nav>
+
+  </div>
+
+    </header>
+    
+        <div class="page-content">
       <div class="wrapper">
         {{ content }}
       </div>
     </div>
 
-    {% include_relative footer.html %}
+    {% include footer.html %}
+    
 
   </body>
-
-</html>
