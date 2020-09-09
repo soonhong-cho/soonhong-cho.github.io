@@ -10,7 +10,7 @@ document.write( '\n' );
 document.write( '</head>\n' );
 document.write( '\n' );
 document.write( '\n' );
-document.write( '  <body oncontextmenu="return false">>\n' );
+document.write( '  <body oncontextmenu="return false">\n' );
 document.write( '\n' );
 document.write( '    <header class=\"site-header\">\n' );
 document.write( '\n' );
