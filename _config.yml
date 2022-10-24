@@ -1,13 +1,13 @@
 # Site settings
-title: Doeun Kim
-email: doeun2@ucla.edu
+title: Soonhong Cho
+email: tnsehdtm@gmail.com
 description: >
  Department of Political Science
- Bunche Hall 
+ Bunche Hall
  Los Angeles, CA 90095
 baseurl: "" # the subpath of your site, e.g. /blog/
-url: "http://doeun-kim.github.io" # the base hostname & protocol for your site
-github_username:  doeun-kim
+url: "http://soonhong-cho.github.io" # the base hostname & protocol for your site
+github_username:  soonhong-cho
 encoding: UTF-8
 # Build settings
 markdown: kramdown
