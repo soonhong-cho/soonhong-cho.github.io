@@ -7,10 +7,6 @@ dl, dd, ol, ul, figure {
   margin: 0;
   padding: 0; }
 
-li {
-  display: inline;
-}
-
 /**
  * Basic styling
  */
