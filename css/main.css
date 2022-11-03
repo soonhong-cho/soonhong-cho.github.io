@@ -32,7 +32,7 @@ ul, ol, dl, figure,
  * Position div Elements Side by Side
  */
 div {
-  float: left;
+  display: inline-block;
 }
 
 /**
