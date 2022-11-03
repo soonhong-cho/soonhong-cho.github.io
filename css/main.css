@@ -29,13 +29,6 @@ ul, ol, dl, figure,
   margin-bottom: 15px; }
 
 /**
- * Position div Elements Side by Side
- */
-div {
-  display: inline-block;
-}
-
-/**
  * Images
  */
 img {
@@ -242,6 +235,7 @@ SVG Icons - svgicons.sparkk.fr
 
 .contact-list,
 .social-media-list {
+  display: inline-block;
   list-style: none;
   margin-left: 0; }
 
@@ -260,6 +254,7 @@ SVG Icons - svgicons.sparkk.fr
   width: calc(35% - (30px / 2)); }
 
 .footer-col-2 {
+  display: inline-block;
   width: -webkit-calc(20% - (30px / 2));
   width: calc(20% - (30px / 2)); }
 
