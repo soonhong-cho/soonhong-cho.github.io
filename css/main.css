@@ -240,7 +240,6 @@ SVG Icons - svgicons.sparkk.fr
 
 .footer-col-wrapper {
   font-size: 15px;
-  display: flex;
   color: #828282;
   margin-left: -15px; }
 
@@ -254,6 +253,7 @@ SVG Icons - svgicons.sparkk.fr
   width: calc(35% - (30px / 2)); }
 
 .footer-col-2 {
+  display: flex;
   width: -webkit-calc(20% - (30px / 2));
   width: calc(20% - (30px / 2)); }
 
