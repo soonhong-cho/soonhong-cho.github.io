@@ -245,6 +245,7 @@ SVG Icons - svgicons.sparkk.fr
   margin-left: -15px; }
 
 .footer-col {
+  float: left;
   margin-bottom: 15px;
   padding-left: 15px; }
 
@@ -253,7 +254,7 @@ SVG Icons - svgicons.sparkk.fr
   width: calc(35% - (30px / 2)); }
 
 .footer-col-2 {
-  display: inline-block;
+  float: left;
   width: -webkit-calc(20% - (30px / 2));
   width: calc(20% - (30px / 2)); }
 
