@@ -19,6 +19,14 @@ body {
   background-color: #fdfdfd;
   -webkit-text-size-adjust: 100%; }
 
+
+/**
+ * Position HTML Elements Side by Side (for footer col2)
+ */
+li {
+  display: inline;
+}
+
 /**
  * Set `margin-bottom` to maintain vertical rhythm
  */
