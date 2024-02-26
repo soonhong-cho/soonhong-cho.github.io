@@ -38,11 +38,11 @@ ul.dashed>li:before {
 
 /* details */
 details[open] {
-  margin: 0.5em 0em 1em 0em;
+  margin: 0.1em 0.2em 0.1em 0em;
   padding-left: 1em;
   padding-right: 1em;
   padding-bottom: 1em;
-  padding-top: 1em;
+  padding-top: 0.5em;
   border-left: 0.25em solid $primary-color;
   background-color: #f6f7f8;
 
