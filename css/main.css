@@ -20,6 +20,39 @@ body {
   -webkit-text-size-adjust: 100%; }
 
 
+/* Soonhong-defined styles: 1) for class="dashed" in ul, 2) details  */
+/* for class="dashed" in ul */
+ul.dashed {
+  list-style-type: none;
+}
+
+ul.dashed>li {
+  text-indent: -10px;
+}
+
+ul.dashed>li:before {
+  content: "- ";
+  text-indent: -10px;
+}
+
+/* details */
+details[open] {
+  margin: 1em 0em 2em 0;
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-bottom: 0.2em;
+  padding-top: 0.2em;
+  border-left: 0.25em solid $primary-color;
+  background-color: #f6f7f8;
+
+  cite {
+    :before {
+      padding-right: 5px;
+    }
+  }
+}
+
+
 /**
  * Position HTML Elements Side by Side (for footer col)
  */
@@ -35,22 +68,6 @@ p, blockquote, pre,
 ul, ol, dl, figure,
 .highlight {
   margin-bottom: 15px; }
-
-/**
- * for class="dashed" in ul
- */
-ul.dashed {
-  list-style-type: none;
-}
-
-ul.dashed>li {
-  text-indent: -10px;
-}
-
-ul.dashed>li:before {
-  content: "- ";
-  text-indent: -10px;
-}
 
 
 /**
