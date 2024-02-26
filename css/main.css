@@ -37,6 +37,23 @@ ul, ol, dl, figure,
   margin-bottom: 15px; }
 
 /**
+ * for class="dashed" in ul
+ */
+ul.dashed {
+  list-style-type: none;
+}
+
+ul.dashed>li {
+  text-indent: -10px;
+}
+
+ul.dashed>li:before {
+  content: "- ";
+  text-indent: -10px;
+}
+
+
+/**
  * Images
  */
 img {
