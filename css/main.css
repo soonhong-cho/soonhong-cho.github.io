@@ -20,7 +20,7 @@ body {
   -webkit-text-size-adjust: 100%; }
 
 
-/* Soonhong-defined styles: 1) for class="dashed" in ul, 2) details  */
+/* User-specified styles: 1) for class="dashed" in ul, 2) details  */
 /* for class="dashed" in ul */
 ul.dashed {
   list-style-type: none;
@@ -48,6 +48,7 @@ details[open] {
 
   cite {
     :before {
+      text-indent: -5px;
       padding-right: 5px;
     }
   }
