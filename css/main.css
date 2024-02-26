@@ -24,10 +24,10 @@ body {
 /* for class="dashed" in ul */
 ul.dashed {
   list-style-type: none;
-  margin: 10px 0;
 }
 
 ul.dashed>li {
+  margin: 10px 0;
   text-indent: -10px;
 }
 
@@ -38,11 +38,11 @@ ul.dashed>li:before {
 
 /* details */
 details[open] {
-  margin: 1em 0em 2em 0;
+  margin: 0.5em 0em 1em 0em;
   padding-left: 1em;
   padding-right: 1em;
-  padding-bottom: 0.2em;
-  padding-top: 0.2em;
+  padding-bottom: 1em;
+  padding-top: 1em;
   border-left: 0.25em solid $primary-color;
   background-color: #f6f7f8;
 
