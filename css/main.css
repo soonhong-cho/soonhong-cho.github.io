@@ -24,6 +24,7 @@ body {
 /* for class="dashed" in ul */
 ul.dashed {
   list-style-type: none;
+  margin: 10px 0;
 }
 
 ul.dashed>li {
