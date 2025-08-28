@@ -23,18 +23,19 @@ body {
 /* User-specified styles: 1) for class="dashed" in ul, 2) details  */
 /* for class="dashed" in ul */
 ul.dashed {
-  list-style-type: disc; /* or circle for hollow circles */
+  list-style-type: disc; /* This creates the bullet points */
   list-style-position: outside;
-  margin-left: 20px;
+  margin-left: 20px; /* Adjust spacing as needed */
 }
 ul.dashed>li {
   margin: 10px 0;
-  text-indent: 0;
+  text-indent: 0; /* Reset text-indent since we're using list-style */
 }
 ul.dashed>li:before {
-  content: none;
+  content: none; /* Remove the custom content since we're using list-style */
 }
-/* Old version with "- ":
+
+/* Old version:
 ul.dashed {
   list-style-type: none;
 }
@@ -48,6 +49,7 @@ ul.dashed>li:before {
   text-indent: -10px;
 }
 */
+
 
 /* details */
 details[open] {
