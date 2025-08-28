@@ -23,17 +23,6 @@ body {
 /* User-specified styles: 1) for class="dashed" in ul, 2) details  */
 /* for class="dashed" in ul */
 ul.dashed {
-  list-style-type: disc; /* solid circle bullet */
-  list-style-position: outside;
-}
-
-ul.dashed>li {
-  display: list-item; /* Explicitly tell it to behave like a list item */
-  margin: 10px 0;
-}
-
-/* Old version:
-ul.dashed {
   list-style-type: none;
 }
 ul.dashed>li {
@@ -41,10 +30,10 @@ ul.dashed>li {
   text-indent: -10px;
 }
 ul.dashed>li:before {
-  content: "- ";
+  /* content: "- ";      Old version*
+  content: "• ";
   text-indent: -10px;
 }
-*/
 
 
 /* details */
@@ -69,14 +58,9 @@ details[open] {
 /**
  * Position HTML Elements Side by Side (for footer col)
  */
-.site-footer li {
-  display: inline-block;
-}
-/* Old version
 li {
   display: inline-block;
 }
-*/
 
 /**
  * Set `margin-bottom` to maintain vertical rhythm
