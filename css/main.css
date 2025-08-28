@@ -23,6 +23,19 @@ body {
 /* User-specified styles: 1) for class="dashed" in ul, 2) details  */
 /* for class="dashed" in ul */
 ul.dashed {
+  list-style-type: disc; /* or circle for hollow circles */
+  list-style-position: outside;
+  margin-left: 20px;
+}
+ul.dashed>li {
+  margin: 10px 0;
+  text-indent: 0;
+}
+ul.dashed>li:before {
+  content: none;
+}
+/* Old version with "- ":
+ul.dashed {
   list-style-type: none;
 }
 ul.dashed>li {
@@ -34,6 +47,7 @@ ul.dashed>li:before {
   content: "- ";
   text-indent: -10px;
 }
+*/
 
 /* details */
 details[open] {
