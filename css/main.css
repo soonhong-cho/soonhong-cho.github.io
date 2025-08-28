@@ -26,6 +26,7 @@ ul.dashed {
   list-style-type: none;
 }
 
+/* old version with "- " for unlisted
 ul.dashed>li {
   margin: 10px 0;
   text-indent: -10px;
@@ -33,6 +34,15 @@ ul.dashed>li {
 
 ul.dashed>li:before {
   content: "- ";
+  text-indent: -10px;
+}
+*/
+
+ul.dashed>li {
+  list-style-type: circle;
+}
+
+ul.dashed > li:before {
   text-indent: -10px;
 }
 
