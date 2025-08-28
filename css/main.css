@@ -23,16 +23,13 @@ body {
 /* User-specified styles: 1) for class="dashed" in ul, 2) details  */
 /* for class="dashed" in ul */
 ul.dashed {
-  list-style-type: disc; /* This creates the bullet points */
-  list-style-position: outside;
-  margin-left: 20px; /* Adjust spacing as needed */
+  list-style-type: disc; /* This creates the solid circle */
+  list-style-position: outside; /* Aligns bullets to the left */
+  margin-left: 20px; /* Adjust margin for proper indentation */
 }
+
 ul.dashed>li {
   margin: 10px 0;
-  text-indent: 0; /* Reset text-indent since we're using list-style */
-}
-ul.dashed>li:before {
-  content: none; /* Remove the custom content since we're using list-style */
 }
 
 /* Old version:
