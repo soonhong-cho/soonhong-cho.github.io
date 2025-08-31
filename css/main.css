@@ -30,7 +30,7 @@ ul.dashed>li {
   text-indent: -10px;
 }
 ul.dashed>li:before {
-  /* content: "- ";      Old version*
+  /* content: "- ";      Old version*/
   content: "• ";
   text-indent: -10px;
 }
