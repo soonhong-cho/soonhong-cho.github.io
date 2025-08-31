@@ -25,16 +25,16 @@ body {
 ul.dashed {
   list-style-type: none;
 }
+
 ul.dashed>li {
   margin: 10px 0;
   text-indent: -10px;
 }
+
 ul.dashed>li:before {
-  /* content: "- ";      Old version*/
-  content: "• ";
+  content: "- ";
   text-indent: -10px;
 }
-
 
 /* details */
 details[open] {
@@ -97,7 +97,6 @@ ul, ol {
 li > ul,
 li > ol {
   margin-bottom: 0; }
-
 
 /**
  * Headings
